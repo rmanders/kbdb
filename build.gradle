@@ -1,3 +1,5 @@
+// log4j2 suppport: https://logging.apache.org/log4j/2.x/maven-artifacts.html
+
 apply plugin: 'java'
 
 repositories {
@@ -6,7 +8,12 @@ repositories {
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.7'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.2'
+    compile 'org.apache.logging.log4j:log4j-api:2.2'
+    compile 'org.apache.logging.log4j:log4j-core:2.2'
     compile 'org.springframework:spring-context:4.1.6.RELEASE'
+    compile 'org.hsqldb:hsqldb:2.3.2'
+    compile 'com.zaxxer:HikariCP:2.3.5'
 
 
     testCompile "junit:junit:4.11"

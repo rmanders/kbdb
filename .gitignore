@@ -12,7 +12,7 @@
 hs_err_pid*
 
 .gradle/
-
+.nb-gradle-properties
 /.nb-gradle/
 /build/
 

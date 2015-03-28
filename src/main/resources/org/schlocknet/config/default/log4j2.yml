@@ -1,0 +1,33 @@
+Configuration:
+  status: warn
+
+  Appenders:
+    Console:
+      name: Console
+      target: SYSTEM_OUT
+      PatternLayout:
+        Pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    RollingFile:
+      name: RollingFile
+      fileName: logs/kdbd.log
+      DefaultRolloverStrategy:
+        max: 10
+      PatternLayout:
+        Pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+      Policies:
+        SizeBasedTriggeringPolicy:
+          size: "5 MB"
+
+  Loggers:
+    org.schlocknet:
+        level: debug
+        AppenderRef:
+            ref: Console
+        AppenderRef:
+            ref: RollingFile
+    Root:
+      level: warn
+      AppenderRef:
+        ref: Console
+      AppenderRef:
+          ref: RollingFile
