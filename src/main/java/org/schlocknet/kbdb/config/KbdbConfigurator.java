@@ -2,6 +2,7 @@ package org.schlocknet.kbdb.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,34 @@ public class KbdbConfigurator {
     @Bean
     public HikariDataSource relationalDataSource() {
         logger.debug("Creating relationalDatasource bean");
-        HikariConfig cfg = new HikariConfig();
-        cfg.setDataSourceClassName(env.getProperty("dataSource.className"));
-        cfg.setCatalog(env.getProperty("dataSource.database", "kbdb"));
+        HikariConfig cfg = new HikariConfig();       
+        
+        final String dataSourceClassName = env.getProperty("dataSource.dataSourceClass");
+        final String diverClassName = env.getProperty("dataSource.driverClass");
+        
+        
+        cfg.setJdbcUrl(env.getProperty("dataSource.jdbcUrl"));
+        //org.hsqldb.jdbc.JDBCDataSource ds = new org.hsqldb.jdbc.JDBCDataSource();
+        //cfg.setDataSourceClassName(env.getProperty("dataSource.className"));
+        //cfg.setCatalog(env.getProperty("dataSource.database", "kbdb"));
         cfg.setUsername(env.getProperty("dataSource.username", "none"));
         cfg.setPassword(env.getProperty("dataSource.password", "none"));
-        cfg.setPoolName(env.getProperty("cp.poolName","kbdbConnectionPo`ol"));
+        //cfg.setPoolName(env.getProperty("cp.poolName","kbdbConnectionPool"));
         logger.debug("relationalDataSource config: {}", cfg.toString());
-        HikariDataSource ds = new HikariDataSource(cfg);
+        try {
+            HikariDataSource ds = new HikariDataSource(cfg);           
+            return ds;
+        } catch (Exception ex) {
+            System.out.println("EXCEPTION IN HIKARI POOL INIT");
+            ex.printStackTrace(System.out);
+            throw new RuntimeException(ex);
+        }
+        //return null;
+    }
+    
+    public org.hsqldb.jdbc.JDBCDataSource buildHsqlDataSource() {
+        org.hsqldb.jdbc.JDBCDataSource ds = new org.hsqldb.jdbc.JDBCDataSource();
+        ds.setDatabase("kbdb");
         return ds;
     }
        
