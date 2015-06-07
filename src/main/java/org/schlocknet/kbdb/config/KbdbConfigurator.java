@@ -27,10 +27,11 @@ public class KbdbConfigurator {
         // Do Nothing
     }
     
+    //<editor-fold defaultstate="collapsed" desc="relationalDataSource">
     @Bean
     public HikariDataSource relationalDataSource() {
         logger.debug("Creating relationalDatasource bean");
-        HikariConfig cfg = new HikariConfig();       
+        HikariConfig cfg = new HikariConfig();
         
         final String dataSourceClassName = env.getProperty("dataSource.dataSourceClass");
         final String diverClassName = env.getProperty("dataSource.driverClass");
@@ -45,7 +46,7 @@ public class KbdbConfigurator {
         //cfg.setPoolName(env.getProperty("cp.poolName","kbdbConnectionPool"));
         logger.debug("relationalDataSource config: {}", cfg.toString());
         try {
-            HikariDataSource ds = new HikariDataSource(cfg);           
+            HikariDataSource ds = new HikariDataSource(cfg);
             return ds;
         } catch (Exception ex) {
             System.out.println("EXCEPTION IN HIKARI POOL INIT");
@@ -54,11 +55,14 @@ public class KbdbConfigurator {
         }
         //return null;
     }
+    //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="buildHsqlDataSource">
     public org.hsqldb.jdbc.JDBCDataSource buildHsqlDataSource() {
         org.hsqldb.jdbc.JDBCDataSource ds = new org.hsqldb.jdbc.JDBCDataSource();
         ds.setDatabase("kbdb");
         return ds;
     }
+    //</editor-fold>
        
 }
