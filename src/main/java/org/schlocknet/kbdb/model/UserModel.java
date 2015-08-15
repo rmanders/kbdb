@@ -14,7 +14,7 @@ import lombok.Getter;
  *
  * @author Ryan
  */
-public class UserModel implements Serializable {
+public class UserModel extends JsonBase implements Serializable {
     
     private final @Getter UUID userUuid;
     private final @Getter String username;
@@ -36,13 +36,5 @@ public class UserModel implements Serializable {
         this.password = password;
         this.passwordSalt = passwordSalt;
         this.roles = roles;
-    }
-
-    @Override
-    public String toString() {
-        return "UserModel{ username: " 
-                + username
-                +'}';
-    }
-    
+    }    
 }
