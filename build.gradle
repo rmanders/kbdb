@@ -46,3 +46,7 @@ dependencies {
     testCompile "org.springframework:spring-test:${springVersion}"
     testCompile 'commons-lang:commons-lang:2.6'
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
