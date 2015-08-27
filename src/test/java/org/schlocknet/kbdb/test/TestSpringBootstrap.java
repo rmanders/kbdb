@@ -6,6 +6,7 @@
 package org.schlocknet.kbdb.test;
 
 import static junit.framework.TestCase.*;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.core.env.Environment;
 
@@ -13,6 +14,7 @@ import org.springframework.core.env.Environment;
  *
  * @author rmanders
  */
+@Ignore
 public class TestSpringBootstrap extends ContextAwareBase {
     
     @Test

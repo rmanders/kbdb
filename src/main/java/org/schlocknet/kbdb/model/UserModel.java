@@ -6,9 +6,11 @@
 package org.schlocknet.kbdb.model;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -16,12 +18,16 @@ import lombok.Getter;
  */
 public class UserModel extends JsonBase implements Serializable {
     
-    private final @Getter UUID userUuid;
-    private final @Getter String username;
-    private final @Getter String emailAddress;
-    private final @Getter byte[] password;
-    private final @Getter byte[] passwordSalt;
-    private final @Getter List<Integer> roles;
+    private @Getter @Setter UUID userUuid;
+    private @Getter @Setter String username;
+    private @Getter @Setter String emailAddress;
+    private @Getter @Setter byte[] password;
+    private @Getter @Setter byte[] passwordSalt;
+    private @Getter @Setter List<Integer> roles;
+    
+    public UserModel() {
+        roles = new LinkedList<>();
+    }
 
     public UserModel(
             UUID userUuid, 
