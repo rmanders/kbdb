@@ -37,22 +37,26 @@ public class WebserviceAuthenticationInterceptor implements HandlerInterceptor {
         return true;
     }
 
+    //<editor-fold defaultstate="collapsed" desc="postHandle">
     @Override
     public void postHandle(
-            HttpServletRequest request, 
-            HttpServletResponse response, 
-            Object handler, 
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object handler,
             ModelAndView modelAndView) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // Do nothing
     }
-
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="afterCompletion">
     @Override
     public void afterCompletion(
-            HttpServletRequest request, 
-            HttpServletResponse response, 
-            Object handler, 
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object handler,
             Exception ex) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // Do Nothing
     }
+    //</editor-fold>
     
 }

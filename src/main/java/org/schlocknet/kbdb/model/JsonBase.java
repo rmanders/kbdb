@@ -1,6 +1,7 @@
 package org.schlocknet.kbdb.model;
 
 import com.google.gson.Gson;
+import java.io.Serializable;
 
 /**
  *
@@ -9,7 +10,7 @@ import com.google.gson.Gson;
  * Base class for printing out objects as json strings
  * 
  */
-public class JsonBase {
+public class JsonBase implements Serializable {
     
     @Override
     public String toString() {

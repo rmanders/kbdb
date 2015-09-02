@@ -18,29 +18,29 @@ import lombok.Setter;
  */
 public class UserModel extends JsonBase implements Serializable {
     
-    private @Getter @Setter UUID userUuid;
-    private @Getter @Setter String username;
+    private @Getter @Setter UUID userUUID;
     private @Getter @Setter String emailAddress;
     private @Getter @Setter byte[] password;
-    private @Getter @Setter byte[] passwordSalt;
+    private @Getter @Setter byte[] saltBytes;
     private @Getter @Setter List<Integer> roles;
+    private @Getter @Setter Boolean active;
     
     public UserModel() {
         roles = new LinkedList<>();
     }
 
     public UserModel(
-            UUID userUuid, 
-            String username, 
+            UUID userUUID, 
             String emailAddress, 
             byte[] password, 
-            byte[] passwordSalt, 
-            List<Integer> roles) {
-        this.userUuid = userUuid;
-        this.username = username;
+            byte[] saltBytes, 
+            List<Integer> roles,
+            Boolean active) {
+        this.userUUID = userUUID;
         this.emailAddress = emailAddress;
         this.password = password;
-        this.passwordSalt = passwordSalt;
+        this.saltBytes = saltBytes;
         this.roles = roles;
+        this.active = active;
     }    
 }

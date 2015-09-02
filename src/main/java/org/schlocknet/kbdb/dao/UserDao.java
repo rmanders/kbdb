@@ -28,18 +28,16 @@ public interface UserDao {
      * 
      * @param user An instance of {@link UserModel}
      * 
-     * @return true if a user record was updates, false otherwise. 
      */
-    public boolean update(UserModel user);
+    public void update(UserModel user);
     
     /**
      * Deletes/removes a user record from the database based on the userUuid.
      * 
      * @param user An instance of {@link UserModel} to delete
      * 
-     * @return true of a record was deleted, false otherwise.
      */
-    public boolean delete(UserModel user);
+    public void delete(UserModel user);
     
     /**
      * Returns a user record from the database with  matching userUuid.
@@ -49,18 +47,8 @@ public interface UserDao {
      * @return An instance of {@link UserModel} with the matching userUuid or
      *         null if no such user was found.
      */
-    public UserModel getByUuid(UUID userUuid);
-    
-    /**
-     * Returns a user record from the database with  matching username.
-     * 
-     * @param username A String representing the username to search for.
-     * 
-     * @return An instance of {@link UserModel} with the matching username or
-     *         null if no such user was found.
-     */
-    public UserModel getByUsername(String username);
-    
+    public UserModel getByUuid(UUID userUUID);
+        
     /**
      * Returns a user record from the database with matching emailAddress.
      * 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+    
+   <class name="org.schlocknet.kbdb.model.UserModel" table="Users">
+       
+      <meta attribute="class-description">
+         This class contains user details
+      </meta>
+      
+      <id name="userUUID" type="org.hibernate.type.UUIDBinaryType" column="userUUID">
+      </id>
+      
+      <property name="emailAddress" type="string">
+          <column name="emailAddress" not-null="true" />
+      </property>
+
+      <property name="roles" type="org.schlocknet.kbdb.hibernate.types.JsonListType">
+          <column name="roles"  not-null="true"/>
+      </property>
+
+      <property name="password" type="binary">
+          <column name="password"/>
+      </property>
+      
+      <property name="saltBytes" type="binary">
+          <column name="saltBytes"/>
+      </property>
+
+      <property name="active" type="boolean">
+          <column name="active"/>
+      </property>
+
+   </class>
+
+</hibernate-mapping>
