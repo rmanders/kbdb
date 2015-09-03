@@ -108,6 +108,7 @@ public class AuthenticationController {
             jwtPayload.setEmailAddress(req.getEmailAddress());
             jwtPayload.setExp(System.currentTimeMillis() + JWT_EXPIRE_OFFSET);
             jwtPayload.setRoles(user.getRoles());
+            jwtPayload.setUserUUID(user.getUserUUID());
             jwt.setPayload(jwtPayload);
             jwt.setSignature(sec.sign(jwt.encodeHeaderAndPayload()));
             String encodedJwt = jwt.encode();

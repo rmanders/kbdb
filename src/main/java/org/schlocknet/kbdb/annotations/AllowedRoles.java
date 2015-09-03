@@ -34,6 +34,6 @@ import org.schlocknet.kbdb.config.Constants.Roles;
 
 public @interface AllowedRoles {
     
-    public Roles[] values() default {Roles.USER};
+    public Roles[] value() default {Roles.USER};
     
 }
