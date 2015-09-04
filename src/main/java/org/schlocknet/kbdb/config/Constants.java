@@ -13,6 +13,8 @@ public class Constants {
     
     public static final Long JWT_EXPIRE_OFFSET = 1000 * 60 * 60 * 24L;
     
+    public static final String EMAIL_FROM = "no-reply@kbdb.io";
+    
     /**
      * Custom http headers used by kbdb web services.
      */
@@ -44,7 +46,8 @@ public class Constants {
         DB_USER_GET    (0x0002, "Failed to get User from database"),
         DB_USER_CREATE (0x0003, "Failed to create new user record in database"),
         DB_USER_UPDATE (0x0004, "Failed to update user record in database"),
-        DB_USER_DELETE (0x0005, "Failed to delete user record from database")
+        DB_USER_DELETE (0x0005, "Failed to delete user record from database"),
+        EMAIL_SEND     (0x0006, "Error while trying to send an email")
         ;
         
         private final int errorNo;

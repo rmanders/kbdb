@@ -1,6 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'spring-boot'
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 buildscript {
   repositories { jcenter() }
   dependencies {
@@ -35,6 +38,7 @@ dependencies {
     compile "org.springframework.security:spring-security-web${springSecurityVersion}"
     compile "org.hibernate:hibernate-core${hibernateVersion}"
     compile "mysql:mysql-connector-java:5.1.36"
+    compile "javax.mail:mail:1.4.7"
     compile 'org.hsqldb:hsqldb:2.3.2'
     compile 'com.zaxxer:HikariCP:2.3.5'
     compile "com.google.code.gson:gson:2.3.1"

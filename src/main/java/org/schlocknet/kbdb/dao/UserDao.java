@@ -5,6 +5,7 @@
  */
 package org.schlocknet.kbdb.dao;
 
+import java.util.List;
 import java.util.UUID;
 import org.schlocknet.kbdb.model.UserModel;
 
@@ -42,7 +43,7 @@ public interface UserDao {
     /**
      * Returns a user record from the database with  matching userUuid.
      * 
-     * @param userUuid A {@link UUID} representing the userUuid to search for,
+     * @param userUUID A {@link UUID} representing the userUuid to search for,
      * 
      * @return An instance of {@link UserModel} with the matching userUuid or
      *         null if no such user was found.
@@ -58,5 +59,19 @@ public interface UserDao {
      *         or null if no such user was found.
      */
     public UserModel getByEmailAddress(String emailAddress);
+    
+    /**
+     * Returns a list of all users in the database.
+     * 
+     * @param maxItems The maximum number of users to return
+     * 
+     * @param startAtEmail The email address of the user to start at in 
+     * lexicographic order. If null, starts at the lowest lexicographically 
+     * ordered email address.
+     * 
+     * @return A list of users in the database that meet the criteria specified 
+     * in the parameters.
+     */
+    public List<UserModel> getAllUsers(Integer maxItems, String startAtEmail);
     
 }

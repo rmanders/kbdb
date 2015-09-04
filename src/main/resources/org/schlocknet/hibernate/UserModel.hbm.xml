@@ -34,6 +34,10 @@
           <column name="active"/>
       </property>
 
+      <property name="verificationToken" type="string">
+          <column name="verificationToken" />
+      </property>
+
    </class>
 
 </hibernate-mapping>

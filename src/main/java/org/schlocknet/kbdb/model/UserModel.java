@@ -24,6 +24,7 @@ public class UserModel extends JsonBase implements Serializable {
     private @Getter @Setter byte[] saltBytes;
     private @Getter @Setter List<Integer> roles;
     private @Getter @Setter Boolean active;
+    private @Getter @Setter String verificationToken;
     
     public UserModel() {
         roles = new LinkedList<>();
@@ -35,12 +36,14 @@ public class UserModel extends JsonBase implements Serializable {
             byte[] password, 
             byte[] saltBytes, 
             List<Integer> roles,
-            Boolean active) {
+            Boolean active,
+            String verificationToken) {
         this.userUUID = userUUID;
         this.emailAddress = emailAddress;
         this.password = password;
         this.saltBytes = saltBytes;
         this.roles = roles;
         this.active = active;
+        this.verificationToken = verificationToken;
     }    
 }

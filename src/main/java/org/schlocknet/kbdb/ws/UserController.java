@@ -1,7 +1,9 @@
 package org.schlocknet.kbdb.ws;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import org.schlocknet.kbdb.model.ResponseMessage;
 import org.schlocknet.kbdb.model.UserModel;
 import org.schlocknet.kbdb.services.DataAccessService;
 import org.schlocknet.kbdb.services.SecurityService;
+import org.schlocknet.kbdb.util.KbdbStrings;
 import org.schlocknet.kbdb.ws.requests.UsernameAndPasswordRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -156,6 +160,27 @@ public class UserController {
         return new ResponseMessage<>(true);
     }
     //</editor-fold>
+    
+    @ResponseBody
+    @AllowedRoles(Roles.ADMIN)
+    @RequestMapping(method=RequestMethod.GET,produces="application/json")
+    public List<UserModel> listAllUsers(
+            @RequestParam(value="maxItems", defaultValue="20") Integer maxItems,
+            @RequestParam(value="startAtEmail", required=false) String startAtEmail,
+            HttpServletResponse response) {
+        logger.debug("got request to list all users");
+        List<UserModel> emptyList = new ArrayList<>(0);
+        
+        // Validation
+        if (startAtEmail != null && !KbdbStrings.isValidEmail(startAtEmail)) {
+            response.setStatus(HttpStatus.BAD_REQUEST.value());
+            return emptyList;
+        }
+        
+        
+        
+        return null;
+    }
     
         
 }
