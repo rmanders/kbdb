@@ -1,4 +1,9 @@
+group = 'org.schlocknet'
+version = '0.1.0'
+description = """Keyboard Database"""
+
 apply plugin: 'java'
+apply plugin: 'war'
 apply plugin: 'spring-boot'
 
 sourceCompatibility = 1.8
@@ -25,9 +30,9 @@ ext {
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.7'
-    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.2'
-    compile 'org.apache.logging.log4j:log4j-api:2.2'
-    compile 'org.apache.logging.log4j:log4j-core:2.2'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.3'
+    compile 'org.apache.logging.log4j:log4j-api:2.3'
+    compile 'org.apache.logging.log4j:log4j-core:2.3'
     compile 'org.projectlombok:lombok:1.16.2'
     compile "org.springframework:spring-core:${springVersion}"
     compile "org.springframework:spring-context:${springVersion}"
@@ -63,6 +68,18 @@ test {
     systemProperties['fleet'] = 'default'
     minHeapSize = "512m"
     maxHeapSize = "1024m"
+}
+
+jar {
+  manifest {
+    attributes(
+      "Specification-Title": "Keyboard Database (kbdb)",
+      "Implementation-Title": "org.schlocknet.kbdb",
+      "Implementation-Vendor": "DrSchlock",
+      "Implementation-Version": "${version}",
+      "Kbdb-Build-Date": (new Date()).format('yyyy-MM-dd.HH:mm')
+    )
+  }
 }
 
 task wrapper(type: Wrapper) {

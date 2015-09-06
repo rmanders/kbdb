@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
- * @author rmanders
+ * @author Ryan
  */
 @Controller
 @RequestMapping("/users")
@@ -161,6 +161,17 @@ public class UserController {
     }
     //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="listAllUsers">
+    /**
+     * Return a list of all users
+     *
+     * @param maxItems  maximum number of users to return
+     *
+     * @param startAtEmail emailAddress to start at
+     *
+     * @param response
+     * @return
+     */
     @ResponseBody
     @AllowedRoles(Roles.ADMIN)
     @RequestMapping(method=RequestMethod.GET,produces="application/json")
@@ -177,10 +188,15 @@ public class UserController {
             return emptyList;
         }
         
-        
-        
-        return null;
+        try {
+            return das.getUserDao().getAllUsers(
+                    maxItems, startAtEmail);
+        } catch (Exception ex) {
+            logger.error("{}: Error while getting a list of all users",
+                    Errors.DB_USER_GET, ex);
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return emptyList;
+        }
     }
-    
-        
+    //</editor-fold>
 }

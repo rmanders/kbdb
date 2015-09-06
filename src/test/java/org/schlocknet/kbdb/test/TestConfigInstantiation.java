@@ -8,7 +8,7 @@ package org.schlocknet.kbdb.test;
 import static junit.framework.TestCase.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.schlocknet.kbdb.config.KbdbConfigurator;
+import org.schlocknet.kbdb.config.KbdbBaseConfigurator;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Ryan
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = KbdbConfigurator.class)
+@ContextConfiguration(classes = KbdbBaseConfigurator.class)
 public class TestConfigInstantiation {
     
     @Test
