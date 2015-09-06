@@ -16,10 +16,8 @@ import lombok.Setter;
  */
 public class KeyboardModel implements Serializable {
     
-    private @Getter @Setter UUID keyboardUuid;
-    private @Getter @Setter String model;
-    private @Getter @Setter String maker;
-    private @Getter @Setter String switchTypes;
-    private @Getter @Setter String description;
+    private @Getter @Setter UUID kbUUID;
+    private @Getter @Setter String modelUUID;
+    private @Getter @Setter String kbDescription;
     
 }

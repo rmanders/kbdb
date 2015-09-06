@@ -1,6 +1,7 @@
 package org.schlocknet.kbdb.services;
 
 import lombok.Getter;
+import org.schlocknet.kbdb.dao.LargeObjectStore;
 import org.schlocknet.kbdb.dao.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +20,15 @@ public class DataAccessService {
     
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final @Getter UserDao userDao;
+    private final @Getter LargeObjectStore largeObjectStore;
     
     @Autowired
-    public DataAccessService(UserDao userDao) {
+    public DataAccessService(
+            UserDao userDao,
+            LargeObjectStore largeObjectStore) {
         logger.debug("Instantiating {}...", getClass().getCanonicalName());
         this.userDao = userDao;
+        this.largeObjectStore = largeObjectStore;
     }
     
 }

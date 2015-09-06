@@ -6,6 +6,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
+import org.schlocknet.kbdb.dao.LargeObjectStore;
+import org.schlocknet.kbdb.dao.LargeObjectStoreFileSystemImpl;
 import org.schlocknet.kbdb.dao.UserDao;
 import org.schlocknet.kbdb.dao.UserDaoHibernateImpl;
 import org.schlocknet.kbdb.services.SecurityService;
@@ -58,7 +60,7 @@ public class KbdbBaseConfigurator implements TransactionManagementConfigurer {
         
         final String dataSourceClassName = 
                 env.getProperty("dataSource.dataSourceClass");
-        final String diverClassName =
+        final String diverClassName =   
                 env.getProperty("dataSource.driverClass");
         
         
@@ -107,10 +109,12 @@ public class KbdbBaseConfigurator implements TransactionManagementConfigurer {
         //props.setProperty("hibernate.c3p0.timeout", "600");
         //props.setProperty("hibernate.c3p0.idle_test_period", "5000");
         
-        //session.setPackagesToScan("sor.schlocknet.kbdb.entity");
+        //session.setPackagesToScan("org.schlocknet.kbdb.entity");
         session.setHibernateProperties(props);
         session.setMappingResources(
                 "org/schlocknet/hibernate/UserModel.hbm.xml"
+                ,"org/schlocknet/hibernate/ManufacturerModel.hbm.xml"
+                ,"org/schlocknet/hibernate/ManufacturerModelModel.hbm.xml"
         );
         session.setDataSource(relationalDataSource);
         return session;
@@ -152,6 +156,21 @@ public class KbdbBaseConfigurator implements TransactionManagementConfigurer {
     }
     //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="largeObjectStore">
+    @Bean
+    public LargeObjectStore largeObjectStore() {
+        final String storeType = env.getProperty("app.objectStore.type",
+                "file");
+        final String basePath = env.getProperty("app.objectStore.basePath",
+                System.getProperty("java.io.tmpdir","/tmp"));
+        // TODO: add support for different storeTypes with the default being
+        // file store
+        LargeObjectStoreFileSystemImpl los =
+                new LargeObjectStoreFileSystemImpl(basePath);
+        return los;
+    }
+    //</editor-fold>
+    
     // ===== Service Beans =====================================================
     
     //<editor-fold defaultstate="collapsed" desc="securityService">
@@ -160,7 +179,7 @@ public class KbdbBaseConfigurator implements TransactionManagementConfigurer {
             throws UnsupportedEncodingException, NoSuchAlgorithmException,
             InvalidKeyException {
         
-        String secretKey = null;
+        String secretKey;
         if (System.getProperty("app.secretKey", null) != null) {
             secretKey = System.getProperty("app.secretKey");
         } else {

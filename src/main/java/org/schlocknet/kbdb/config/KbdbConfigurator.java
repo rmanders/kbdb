@@ -75,8 +75,7 @@ public class KbdbConfigurator extends WebMvcConfigurerAdapter {
         
         return factory;
     }
-    //</editor-fold>
-    
+    //</editor-fold>    
     
     // ===== Web Server Configuration ==========================================
     

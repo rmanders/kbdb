@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+    
+   <class name="org.schlocknet.kbdb.model.ManufacturerModelModel" table="Manufacturers">
+       
+      <meta attribute="class-description">
+         This class contains Manufacturer details
+      </meta>
+      
+      <id name="modelUUID" type="org.hibernate.type.UUIDBinaryType" column="modelUUID">
+      </id>
+
+      <property name="mfgUUID" type="org.hibernate.type.UUIDBinaryType">
+          <column name="mfgUUID" not-null="true" />
+      </property> 
+      
+      <property name="modelName" type="string">
+          <column name="modelName" not-null="true" />
+      </property>
+      
+   </class>
+
+</hibernate-mapping>

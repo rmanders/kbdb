@@ -15,6 +15,8 @@ public class Constants {
     
     public static final String EMAIL_FROM = "no-reply@kbdb.io";
     
+    public static final Integer MAX_DATA_OBJECT_SIZE = 4000000;
+    
     /**
      * Custom http headers used by kbdb web services.
      */
@@ -35,19 +37,20 @@ public class Constants {
         private Roles(Integer roleId) {this.roleId = roleId;}
         private final Integer roleId;
         public Integer id() {return roleId;}
-    }
-    
+    }    
     
     /**
      * Common error messages relating to kbdb
      */
     public static enum Errors {
-        CHAR_ENCODING  (0x0001, "Character encoding error"),
-        DB_USER_GET    (0x0002, "Failed to get User from database"),
-        DB_USER_CREATE (0x0003, "Failed to create new user record in database"),
-        DB_USER_UPDATE (0x0004, "Failed to update user record in database"),
-        DB_USER_DELETE (0x0005, "Failed to delete user record from database"),
-        EMAIL_SEND     (0x0006, "Error while trying to send an email")
+        CHAR_ENCODING      (0x0001, "Character encoding error"),
+        DB_USER_GET        (0x0002, "Failed to get User from database"),
+        DB_USER_CREATE     (0x0003, "Failed to create new user record in database"),
+        DB_USER_UPDATE     (0x0004, "Failed to update user record in database"),
+        DB_USER_DELETE     (0x0005, "Failed to delete user record from database"),
+        EMAIL_SEND         (0x0006, "Error while trying to send an email"),
+        LARGE_OBJECT_WRITE (0x0007, "Error while writing object to large object store"),
+        LARGE_OBJECT_READ  (0x0008, "Error while reading object data from large object store")
         ;
         
         private final int errorNo;
