@@ -2,7 +2,7 @@ package org.schlocknet.kbdb.config;
 
 /**
  *
- * @author rmanders
+ * @author Ryan
  * 
  * Constants for use throughout the project
  * 
@@ -16,6 +16,8 @@ public class Constants {
     public static final String EMAIL_FROM = "no-reply@kbdb.io";
     
     public static final Integer MAX_DATA_OBJECT_SIZE = 4000000;
+    
+    public static final Integer MAX_DB_RESULT_ITEMS = 4000;
     
     /**
      * Custom http headers used by kbdb web services.
