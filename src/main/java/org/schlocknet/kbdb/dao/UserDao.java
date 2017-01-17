@@ -7,7 +7,7 @@ package org.schlocknet.kbdb.dao;
 
 import java.util.List;
 import java.util.UUID;
-import org.schlocknet.kbdb.model.UserModel;
+import org.schlocknet.kbdb.model.User;
 
 /**
  *
@@ -19,46 +19,46 @@ public interface UserDao {
      * Saves a new user record to the database. Throws an exception if the
      * user already exists.
      * 
-     * @param user An instance of {@link UserModel}
+     * @param user An instance of {@link User}
      */
-    public void save(UserModel user);
+    public void save(User user);
     
     /**
      * Updates a user's password, passwordSalt, emailAddres or roles in the 
      * database.
      * 
-     * @param user An instance of {@link UserModel}
+     * @param user An instance of {@link User}
      * 
      */
-    public void update(UserModel user);
+    public void update(User user);
     
     /**
      * Deletes/removes a user record from the database based on the userUuid.
      * 
-     * @param user An instance of {@link UserModel} to delete
+     * @param user An instance of {@link User} to delete
      * 
      */
-    public void delete(UserModel user);
+    public void delete(User user);
     
     /**
      * Returns a user record from the database with  matching userUuid.
      * 
      * @param userUUID A {@link UUID} representing the userUuid to search for,
      * 
-     * @return An instance of {@link UserModel} with the matching userUuid or
+     * @return An instance of {@link User} with the matching userUuid or
      *         null if no such user was found.
      */
-    public UserModel getByUuid(UUID userUUID);
+    public User getByUuid(UUID userUUID);
         
     /**
      * Returns a user record from the database with matching emailAddress.
      * 
      * @param emailAddress A String representing the emailAddress to search for.
      * 
-     * @return An instance of {@link UserModel} with the matching emailAddress
+     * @return An instance of {@link User} with the matching emailAddress
      *         or null if no such user was found.
      */
-    public UserModel getByEmailAddress(String emailAddress);
+    public User getByEmailAddress(String emailAddress);
     
     /**
      * Returns a list of all users in the database.
@@ -72,6 +72,6 @@ public interface UserDao {
      * @return A list of users in the database that meet the criteria specified 
      * in the parameters.
      */
-    public List<UserModel> getAllUsers(Integer maxItems, String startAtEmail);
+    public List<User> getAllUsers(Integer maxItems, String startAtEmail);
     
 }

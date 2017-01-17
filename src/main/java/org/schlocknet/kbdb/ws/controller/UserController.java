@@ -1,4 +1,4 @@
-package org.schlocknet.kbdb.ws;
+package org.schlocknet.kbdb.ws.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import org.schlocknet.kbdb.annotations.AllowedRoles;
 import org.schlocknet.kbdb.config.Constants.Errors;
 import org.schlocknet.kbdb.config.Constants.Roles;
 import org.schlocknet.kbdb.model.ResponseMessage;
-import org.schlocknet.kbdb.model.UserModel;
+import org.schlocknet.kbdb.model.User;
 import org.schlocknet.kbdb.services.DataAccessService;
 import org.schlocknet.kbdb.services.SecurityService;
 import org.schlocknet.kbdb.util.KbdbStrings;
@@ -76,7 +76,7 @@ public class UserController {
         }
         
         // Check for existing user with email in db
-        final UserModel userChk;
+        final User userChk;
         try {
             userChk = das.getUserDao().getByEmailAddress(
                     newUserRequest.getEmailAddress());
@@ -97,7 +97,7 @@ public class UserController {
                     + "emailAddress");
         }
         
-        UserModel user = new UserModel();
+        User user = new User();
         user.setEmailAddress(newUserRequest.getEmailAddress());
         user.setRoles(new LinkedList<>());
         user.getRoles().add(Roles.USER.id());
@@ -175,12 +175,12 @@ public class UserController {
     @ResponseBody
     @AllowedRoles(Roles.ADMIN)
     @RequestMapping(method=RequestMethod.GET,produces="application/json")
-    public List<UserModel> listAllUsers(
+    public List<User> listAllUsers(
             @RequestParam(value="maxItems", defaultValue="20") Integer maxItems,
             @RequestParam(value="startAtEmail", required=false) String startAtEmail,
             HttpServletResponse response) {
         logger.debug("got request to list all users");
-        List<UserModel> emptyList = new ArrayList<>(0);
+        List<User> emptyList = new ArrayList<>(0);
         
         // Validation
         if (startAtEmail != null && !KbdbStrings.isValidEmail(startAtEmail)) {

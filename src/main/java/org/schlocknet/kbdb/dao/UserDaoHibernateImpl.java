@@ -11,25 +11,25 @@ import java.util.UUID;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.schlocknet.kbdb.model.UserModel;
+import org.schlocknet.kbdb.model.User;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Ryan
  */
-public class UserDaoHibernateImpl extends HibernateImplBase<UserModel> 
+public class UserDaoHibernateImpl extends HibernateImplBase<User> 
 implements UserDao {
 
     //<editor-fold defaultstate="collapsed" desc="getByUuid">
     @Override
     @Transactional(readOnly=true)
-    public UserModel getByUuid(UUID userUUID) {
+    public User getByUuid(UUID userUUID) {
         if (userUUID == null) {
             return null;
         }
-        List<UserModel> results =
-                getCurrentSession().createCriteria(UserModel.class, "u")
+        List<User> results =
+                getCurrentSession().createCriteria(User.class, "u")
                         .add(Restrictions.eq("u.userUUID", userUUID))
                         .list();
         if (results == null || results.isEmpty()) {
@@ -42,12 +42,12 @@ implements UserDao {
     //<editor-fold defaultstate="collapsed" desc="getByEmailAddress">
     @Override
     @Transactional(readOnly=true)
-    public UserModel getByEmailAddress(String emailAddress) {
+    public User getByEmailAddress(String emailAddress) {
         if (emailAddress == null || emailAddress.trim().length() == 0) {
             return null;
         }
-        List<UserModel> results =
-                getCurrentSession().createCriteria(UserModel.class, "u")
+        List<User> results =
+                getCurrentSession().createCriteria(User.class, "u")
                         .add(Restrictions.eq("u.emailAddress", emailAddress))
                         .list();
         if (results == null || results.isEmpty()) {
@@ -60,8 +60,8 @@ implements UserDao {
     //<editor-fold defaultstate="collapsed" desc="getAllUsers">
     @Override
     @Transactional(readOnly=true)
-    public List<UserModel> getAllUsers(Integer maxItems, String startAtEmail) {
-        Criteria c = getCurrentSession().createCriteria(UserModel.class, "u");
+    public List<User> getAllUsers(Integer maxItems, String startAtEmail) {
+        Criteria c = getCurrentSession().createCriteria(User.class, "u");
         if (maxItems == null) {
             c.setMaxResults(20);
         } else if (maxItems <= 0) {
@@ -73,7 +73,7 @@ implements UserDao {
             c.add(Restrictions.ge("u.emailAddress", startAtEmail));
         }
         c.addOrder(Order.asc("u.emailAddress"));
-        List<UserModel> results = c.list();
+        List<User> results = c.list();
         if (results == null) {
             return new ArrayList<>(0);
         }

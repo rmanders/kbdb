@@ -1,0 +1,9 @@
+
+server:
+  port: 8180
+  context-path: '/'
+logging:
+  file: 'logs/kbdb.log'
+  level:
+    org:
+      schlocknet: 'DEBUG'

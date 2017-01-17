@@ -34,18 +34,25 @@ ext {
     hibernateVersion = "5.2.5.Final"
 }
 
+dependencyManagement {
+  imports {
+    mavenBom 'org.springframework.data:spring-data-releasetrain:Hopper-SR5' // Fpr Spring-Data "BOM"
+  }
+}
+
 dependencies {
+    compile "com.google.code.gson:gson:2.3.1"
+    compile 'com.zaxxer:HikariCP:2.3.5'
     compile "commons-io:commons-io:2.5"
     compile "javax.mail:mail:1.4.7"
+    compile "mysql:mysql-connector-java:5.1.36"
     compile 'org.apache.commons:commons-lang3:3.4'
     compile "org.hibernate:hibernate-core:${hibernateVersion}"  // Hibernate ORM
     compile "org.hibernate:hibernate-entitymanager:${hibernateVersion}"  // Needed so that Spring-data can work
-    compile 'org.projectlombok:lombok:1.16.12'
-    compile "org.springframework.data:spring-data-jpa:1.10.2.RELEASE" // Required for using Spring-Data ORM on top of JPA and hibernate
-    compile "mysql:mysql-connector-java:5.1.36"
     compile 'org.hsqldb:hsqldb:2.3.2'
-    compile 'com.zaxxer:HikariCP:2.3.5'
-    compile "com.google.code.gson:gson:2.3.1"
+    compile 'org.projectlombok:lombok:1.16.12'
+    compile 'org.springframework.data:spring-data-jpa' // Spring Data
+    compile "org.springframework.data:spring-data-jpa:1.10.2.RELEASE" // Required for using Spring-Data ORM on top of JPA and hibernate
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}") { 
         exclude module: "spring-boot-starter-tomcat" 
     }

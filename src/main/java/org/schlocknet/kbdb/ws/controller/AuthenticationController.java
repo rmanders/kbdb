@@ -1,4 +1,4 @@
-package org.schlocknet.kbdb.ws;
+package org.schlocknet.kbdb.ws.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
@@ -15,7 +15,7 @@ import org.schlocknet.kbdb.config.Constants.Errors;
 import org.schlocknet.kbdb.config.Constants.Headers;
 import static org.schlocknet.kbdb.config.Constants.JWT_EXPIRE_OFFSET;
 import org.schlocknet.kbdb.model.ResponseMessage;
-import org.schlocknet.kbdb.model.UserModel;
+import org.schlocknet.kbdb.model.User;
 import org.schlocknet.kbdb.security.KbdbJWT;
 import org.schlocknet.kbdb.security.KbdbJWTPayload;
 import org.schlocknet.kbdb.services.DataAccessService;
@@ -88,7 +88,7 @@ public class AuthenticationController {
         }
         
         // Look for the user
-        final UserModel user;
+        final User user;
         try {
             user = das.getUserDao().getByEmailAddress(req.getEmailAddress());
             if (user == null) {
@@ -164,7 +164,7 @@ public class AuthenticationController {
         }
         
         // Check that the user email exists in database
-        final UserModel user;
+        final User user;
         try {
             user = das.getUserDao().getByEmailAddress(req.getEmailAddress());
             if (user == null) {
@@ -230,7 +230,7 @@ public class AuthenticationController {
         }
         
         // Get the user Object
-        final UserModel user;
+        final User user;
         try {
             user = das.getUserDao().getByEmailAddress(req.getEmailAddress());
             if (user == null) {
@@ -301,7 +301,7 @@ public class AuthenticationController {
         }
         
         // Get the user Object
-        final UserModel user;
+        final User user;
         try {
             user = das.getUserDao().getByUuid(userUUID);
             if (user == null) {
@@ -349,7 +349,7 @@ public class AuthenticationController {
      *
      * @param user The user object to send a password email to
      */
-    private void sendPasswordResetEmail(UserModel user) {
+    private void sendPasswordResetEmail(User user) {
         if (user == null || user.getEmailAddress() == null) {
             logger.warn("User instance or email was null");
             return;

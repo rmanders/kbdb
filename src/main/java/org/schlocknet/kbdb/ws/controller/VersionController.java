@@ -1,4 +1,4 @@
-package org.schlocknet.kbdb.ws;
+package org.schlocknet.kbdb.ws.controller;
 
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
