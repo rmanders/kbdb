@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -87,6 +89,20 @@ public class KbdbHibernateConfig implements TransactionManagementConfigurer
     return emf;
   }
   //</editor-fold>
+
+  @Bean
+  public LocalSessionFactoryBean sessionFactory()
+  {
+    final LocalSessionFactoryBean sf = new LocalSessionFactoryBean();
+
+    return sf;
+  }
+
+  @Bean
+  public HibernateTransactionManager transactionManager()
+  {
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
 
   @Override
   public PlatformTransactionManager annotationDrivenTransactionManager()
