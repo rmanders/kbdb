@@ -1,4 +1,4 @@
-package org.schlocknet.kbdb.services;
+package org.schlocknet.kbdb.service;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
@@ -7,12 +7,17 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Optional;
+
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import static org.schlocknet.kbdb.config.Constants.CHAR_ENCODING;
+
+import org.schlocknet.kbdb.model.user.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  *
@@ -22,7 +27,8 @@ import org.slf4j.LoggerFactory;
  * related functionality.
  * 
  */
-public class SecurityService {
+public class JwtAuthenticationServiceImpl implements JwtAuthenticationService
+{
 
     /** The main Algorithm to use for encryption **/
     public final static String MAIN_ALGORITHM = "HmacSHA256";
@@ -38,7 +44,7 @@ public class SecurityService {
     private final SecureRandom random;
     
     //<editor-fold defaultstate="collapsed" desc="Constructor">
-    public SecurityService(String key)
+    public JwtAuthenticationServiceImpl(String key)
             throws UnsupportedEncodingException, NoSuchAlgorithmException,
             InvalidKeyException {
         logger.debug("Instantiating {}...", getClass().getCanonicalName());
@@ -148,6 +154,24 @@ public class SecurityService {
         byte[] result = hMacDigest.doFinal();
         return Arrays.equals(result, signedHash);
     }
-    //</editor-fold>
+
+    @Override
+    public String buildJwt(final UserInfo userInfo)
+    {
+        return null;
+    }
+
+    @Override
+    public boolean isJwtValid(final String token)
+    {
+        return false;
+    }
+
+  @Override
+  public Optional<UserInfo> extractUserInfo(final String token)
+  {
+    return Optional.empty();
+  }
+  //</editor-fold>
     
 }

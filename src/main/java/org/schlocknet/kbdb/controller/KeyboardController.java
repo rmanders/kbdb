@@ -1,4 +1,4 @@
-package org.schlocknet.kbdb.ws;
+package org.schlocknet.kbdb.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

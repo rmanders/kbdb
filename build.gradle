@@ -30,33 +30,22 @@ repositories {
     mavenCentral()
 }
 
-ext {
-    springVersion = "4.1.7.RELEASE"
-    springBootVersion = "1.4.3.RELEASE"
-    springSecurityVersion = ":4.0.2.RELEASE"
-    hibernateVersion = "5.2.5.Final"
-}
-
 dependencies {
-    compile "commons-io:commons-io:2.5"
-    compile "javax.mail:mail:1.4.7"
-    compile 'org.apache.commons:commons-lang3:3.4'
-    compile "org.hibernate:hibernate-core:${hibernateVersion}"
-    compile "org.hibernate:hibernate-entitymanager:${hibernateVersion}"
-    compile 'org.projectlombok:lombok:1.16.12'
-    compile "org.springframework.data:spring-data-jpa:1.10.2.RELEASE"
-    compile "mysql:mysql-connector-java:5.1.36"
-    compile 'org.hsqldb:hsqldb:2.3.2'
-    compile 'com.zaxxer:HikariCP:2.3.5'
-    compile "com.google.code.gson:gson:2.3.1"
-    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}") {
-        exclude module: "spring-boot-starter-tomcat"
-    }
-    compile("org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}")
-
-
-    testCompile "junit:junit:4.11"
-    testCompile "org.springframework:spring-test:${springVersion}"
+    compile('ch.qos.logback:logback-core:1.2.3')
+    compile('com.auth0:java-jwt:3.3.0')
+    compile('com.google.code.gson:gson:2.8.2')
+    compile('commons-lang:commons-lang:2.6')
+    compile('io.springfox:springfox-swagger2:2.7.0')
+    compile('io.springfox:springfox-swagger-ui:2.7.0')
+    compile('org.projectlombok:lombok:1.16.18')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-starter-jdbc')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('com.openpojo:openpojo:0.8.6')
+    testCompile('nl.jqno.equalsverifier:equalsverifier:2.3.3')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    //testCompile('org.springframework.security:spring-security-test')
 }
 
 test {
@@ -72,7 +61,11 @@ jar {
                 "Implementation-Title": "org.schlocknet.kbdb",
                 "Implementation-Vendor": "DrSchlock",
                 "Implementation-Version": "${version}",
-                "Kbdb-Build-Date": (new Date()).format('yyyy-MM-dd.HH:mm')
+                "Source-Compatibility": project.sourceCompatibility,
+                "Target-Compatibility": project.targetCompatibility,
+                "Built-By": "unknown",
+                "Built-JDK": System.getProperty("java.version"),
+                "Build-Date": (new Date()).format('yyyy-MM-dd.HH:mm')
         )
     }
 }

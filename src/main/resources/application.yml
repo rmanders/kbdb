@@ -1,0 +1,29 @@
+ spring:
+  application:
+    name: "Keyboard Database"
+  profiles:
+    active: local
+server:
+  context-path: /
+  port: 8080
+  ssl:
+    enabled: false
+    key-store: classpath:tomcat.keystore
+    key-store-password: changeme
+    key-password: changeme
+logging:
+  level:
+    org:
+      schlocknet: DEBUG
+
+# ===== L O C A L =================================================================================================
+---
+spring:
+  profiles: local
+jwt:
+  secret: changeme
+
+# ===== P R O D U C T I O N =======================================================================================
+--
+spring:
+  profiles: prod
