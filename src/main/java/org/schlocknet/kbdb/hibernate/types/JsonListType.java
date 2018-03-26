@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
 
 /**
@@ -50,32 +51,21 @@ public class JsonListType implements UserType {
     }
 
     @Override
-    public Object nullSafeGet(ResultSet rs, String[] names, 
-            SessionImplementor session, Object owner) 
-            throws HibernateException, SQLException {
-        List<Integer> result = null;
-        String jsonValue = rs.getString(names[0]);
-        if (jsonValue != null) {
-            try {
-                result = gson.fromJson(jsonValue, 
-                        new TypeToken<List<Integer>>(){}.getType());
-            } catch (JsonSyntaxException ex) {
-                throw new HibernateException(
-                        "Error decoding JSON string to list of integers",ex);
-            }
-        }
-        return result;
+    public Object nullSafeGet(
+        final ResultSet rs, final String[] names, final SharedSessionContractImplementor session,
+        final Object owner
+    ) throws HibernateException, SQLException
+    {
+        return null;
     }
 
     @Override
-    public void nullSafeSet(PreparedStatement st, Object value, 
-            int index, SessionImplementor session) 
-            throws HibernateException, SQLException {
-        if (value == null) {
-            st.setNull(index, Types.VARCHAR);
-        } else {
-            st.setString(index, gson.toJson(value));
-        }        
+    public void nullSafeSet(
+        final PreparedStatement st, final Object value, final int index,
+        final SharedSessionContractImplementor session
+    ) throws HibernateException, SQLException
+    {
+
     }
 
     @Override

@@ -1,30 +1,33 @@
-group = 'org.schlocknet'
-version = '0.1.0'
-description = """Keyboard Database"""
+buildscript {
+    ext {
+        springBootVersion = '1.5.10.RELEASE'
+        gradleReleaseVersion = '2.6.0'
+    }
+    repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("net.researchgate:gradle-release:${gradleReleaseVersion}")
+    }
+}
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'maven'
+apply plugin: 'jacoco'
 apply plugin: 'org.springframework.boot'
 
+group = "${groupId}"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-buildscript {
-  repositories { 
+repositories {
+    mavenLocal()
     jcenter()
     mavenCentral()
-    maven {url 'https://plugins.gradle.org/m2/'}
-  }
-  dependencies {
-        classpath 'se.transmode.gradle:gradle-docker:1.2'
-        classpath("io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE")
-	classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
-  }
-}
-repositories {
-    jcenter()
-    maven()   { url 'http://repo.spring.io/snapshot' }
 }
 
 ext {
@@ -38,19 +41,19 @@ dependencies {
     compile "commons-io:commons-io:2.5"
     compile "javax.mail:mail:1.4.7"
     compile 'org.apache.commons:commons-lang3:3.4'
-    compile "org.hibernate:hibernate-core:${hibernateVersion}"  // Hibernate ORM
-    compile "org.hibernate:hibernate-entitymanager:${hibernateVersion}"  // Needed so that Spring-data can work
+    compile "org.hibernate:hibernate-core:${hibernateVersion}"
+    compile "org.hibernate:hibernate-entitymanager:${hibernateVersion}"
     compile 'org.projectlombok:lombok:1.16.12'
-    compile "org.springframework.data:spring-data-jpa:1.10.2.RELEASE" // Required for using Spring-Data ORM on top of JPA and hibernate
+    compile "org.springframework.data:spring-data-jpa:1.10.2.RELEASE"
     compile "mysql:mysql-connector-java:5.1.36"
     compile 'org.hsqldb:hsqldb:2.3.2'
     compile 'com.zaxxer:HikariCP:2.3.5'
     compile "com.google.code.gson:gson:2.3.1"
-    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}") { 
-        exclude module: "spring-boot-starter-tomcat" 
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}") {
+        exclude module: "spring-boot-starter-tomcat"
     }
     compile("org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}")
-    
+
 
     testCompile "junit:junit:4.11"
     testCompile "org.springframework:spring-test:${springVersion}"
@@ -63,17 +66,17 @@ test {
 }
 
 jar {
-  manifest {
-    attributes(
-      "Specification-Title": "Keyboard Database (kbdb)",
-      "Implementation-Title": "org.schlocknet.kbdb",
-      "Implementation-Vendor": "DrSchlock",
-      "Implementation-Version": "${version}",
-      "Kbdb-Build-Date": (new Date()).format('yyyy-MM-dd.HH:mm')
-    )
-  }
+    manifest {
+        attributes(
+                "Specification-Title": "Keyboard Database (kbdb)",
+                "Implementation-Title": "org.schlocknet.kbdb",
+                "Implementation-Vendor": "DrSchlock",
+                "Implementation-Version": "${version}",
+                "Kbdb-Build-Date": (new Date()).format('yyyy-MM-dd.HH:mm')
+        )
+    }
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.2'
+    gradleVersion = '4.6'
 }
