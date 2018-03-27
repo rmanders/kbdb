@@ -1,8 +1,8 @@
- spring:
+spring:
   application:
     name: "Keyboard Database"
   profiles:
-    active: local
+    active: dev
 server:
   context-path: /
   port: 8080
@@ -16,14 +16,14 @@ logging:
     org:
       schlocknet: DEBUG
 
-# ===== L O C A L =================================================================================================
+# ===== D E V E L O P E N T =======================================================================================
 ---
 spring:
-  profiles: local
+  profiles: dev
 jwt:
   secret: changeme
 
 # ===== P R O D U C T I O N =======================================================================================
---
+---
 spring:
   profiles: prod
