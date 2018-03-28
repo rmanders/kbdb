@@ -7,8 +7,10 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 import org.schlocknet.kbdb.model.ApplicationInfo;
+import org.schlocknet.kbdb.util.ApplicationInfoContributor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -21,7 +23,21 @@ public class SpringActuatorConfig
 
   private static final String UNKNOWN = "N/A";
 
-  protected ApplicationInfo applicationInfo(Class clazz) {
+  /**
+   * Creates an application info contributor for Spring Actuator
+   * @return
+   */
+  @Bean
+  public ApplicationInfoContributor applicationInfoContributor() {
+    return new ApplicationInfoContributor(buildApplicationInfoFromManifest(SpringActuatorConfig.class));
+  }
+
+  /**
+   * Creates and populates an {@link ApplicationInfo} object by reading data from the .jar file manifest
+   * @param clazz
+   * @return
+   */
+  protected ApplicationInfo buildApplicationInfoFromManifest(Class clazz) {
     final String classPath = clazz.getResource(clazz.getSimpleName() + ".class").toString();
 
     if (!classPath.startsWith("jar")) {
