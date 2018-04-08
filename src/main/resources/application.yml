@@ -21,7 +21,11 @@ logging:
 spring:
   profiles: dev
 jwt:
-  secret: changeme
+  secret: changemechangeme
+database:
+  host: localhost
+  user: ''
+  password: ''
 
 # ===== P R O D U C T I O N =======================================================================================
 ---

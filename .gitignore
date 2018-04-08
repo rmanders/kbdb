@@ -2,6 +2,7 @@
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 start-dev.sh
+run.sh
 
 ### STS ###
 .apt_generated
