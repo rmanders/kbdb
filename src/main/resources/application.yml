@@ -23,9 +23,12 @@ spring:
 jwt:
   secret: changemechangeme
 database:
+  dbname: kbdb
+  type: mongo
   host: localhost
-  user: ''
-  password: ''
+  authDb: null
+  user: null
+  password: null
 
 # ===== P R O D U C T I O N =======================================================================================
 ---
