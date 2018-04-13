@@ -29,7 +29,16 @@ public class SpringActuatorConfig
    */
   @Bean
   public ApplicationInfoContributor applicationInfoContributor() {
-    return new ApplicationInfoContributor(buildApplicationInfoFromManifest(SpringActuatorConfig.class));
+    return new ApplicationInfoContributor(applicationInfo());
+  }
+
+  /**
+   * Creates a bean containing information about this application
+   * @return
+   */
+  @Bean
+  public ApplicationInfo applicationInfo() {
+    return buildApplicationInfoFromManifest(SpringActuatorConfig.class);
   }
 
   /**
